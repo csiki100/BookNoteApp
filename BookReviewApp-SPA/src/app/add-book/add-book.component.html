@@ -1,0 +1,15 @@
+
+    <div class="justify-content-center content" style="background: grey">
+      <form class="container text-center" (ngSubmit)="updateUser()">
+        <div class="form-group text-left col-7 name-group">
+          <label for="name">Book's title</label>
+          <input  class="form-control"type="text" id="name" name="name" [(ngModel)]="bookInfo.name">
+        </div>
+        <div class="form-group file-group">
+          <label class="file-upload" for="file">Click to upload a Picture</label>
+          <input type="file" id="file">
+        </div>
+        <button  class="btn btn-success mr-3" type="submit">Create Book</button>
+        <button class="btn btn-secondary" (click)="bsModalRef.hide()" type="button" >Close</button>
+      </form>
+    </div>

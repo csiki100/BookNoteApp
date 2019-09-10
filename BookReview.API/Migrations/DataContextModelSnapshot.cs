@@ -51,6 +51,8 @@ namespace BookReview.API.Migrations
 
                     b.Property<int>("BookId");
 
+                    b.Property<string>("PublicId");
+
                     b.Property<string>("Url");
 
                     b.HasKey("Id", "BookId");

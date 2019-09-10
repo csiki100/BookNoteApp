@@ -1,0 +1,26 @@
+input[type="file"] {
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+}
+
+.file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 16px 22px;
+    cursor: pointer;
+}
+
+.name-group{
+    margin: auto;
+    margin-top:10px;
+    margin-bottom: 25px;
+}
+
+.file-group{
+    margin-bottom:60px;
+}
+
+.content{
+    padding:30px;
+}

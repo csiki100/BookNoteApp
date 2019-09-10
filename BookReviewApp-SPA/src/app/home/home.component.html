@@ -1,0 +1,10 @@
+<div class="container mt-5">
+    <div class="row justify-content-center bg-red">
+        <div *ngIf="!registerMode" class="col-4 bg-yel">
+                <app-login (enableRegister)="changeMode()"></app-login>
+        </div>
+        <div *ngIf="registerMode" class="col-4">
+            <app-register (cancelRegister)="changeMode()"></app-register>
+        </div>
+    </div>
+</div>

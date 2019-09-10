@@ -11,6 +11,7 @@ namespace DatingApp.API.Helpers
         {
             CreateMap<Book, BookForUserListDto>();
             CreateMap<Book, BookForDetailedDto>();
+            CreateMap<BookForCreationDto, Book>();
             CreateMap<UserForRegisterDto, User>();
             CreateMap<User, UserToReturnDto>();
         }

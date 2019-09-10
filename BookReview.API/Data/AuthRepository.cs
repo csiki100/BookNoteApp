@@ -46,5 +46,35 @@ namespace BookReview.API.Data
             }
             return false;
         }
+
+        public async Task<User> Login(string username, string password)
+        {
+            username = username.ToLower();
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
+
+            if (user == null)
+                return null;
+
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+                return null;
+
+            return user;
+
+
+        }
+
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                for (int i = 0; i < computedHash.Length; i++)
+                {
+                    if (computedHash[i] != passwordHash[i])
+                        return false;
+                }
+                return true;
+            }
+        }
     }
 }

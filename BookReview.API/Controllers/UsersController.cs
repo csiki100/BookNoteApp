@@ -2,10 +2,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BookReview.API.Data;
 using BookReview.API.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookReview.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class UsersController :ControllerBase
