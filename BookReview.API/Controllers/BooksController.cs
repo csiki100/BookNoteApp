@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using BookReview.API.Data;
@@ -43,18 +44,18 @@ namespace BookReview.API.Controllers
         }
 
         [HttpGet("{userId}")]
-        public async Task<IActionResult> GetBooksForUser(int userId, [FromQuery]BodyParams bodyParams)
+        public async Task<IActionResult> GetBooksForUser(int userId)
         {
 
-            var books = await _repo.GetBooksForUser(userId,
-             bodyParams.PageNumber, bodyParams.PageSize);
+            var books = await _repo.GetBooksForUser(userId);
+
             var booksToReturn = _mapper.Map<IEnumerable<BookForUserListDto>>(books);
 
             return Ok(booksToReturn);
         }
 
 
-        [HttpGet("book/{bookId}",Name="GetBookDetail")]
+        [HttpGet("book/{bookId}", Name = "GetBookDetail")]
         public async Task<IActionResult> GetBookDetail(int bookId)
         {
             var book = await _repo.GetBook(bookId);
@@ -67,67 +68,127 @@ namespace BookReview.API.Controllers
             return Ok(bookToReturn);
         }
 
-        [HttpDelete("{bookId}")]
-        public async Task<IActionResult> DeleteBook(int bookId)
+        [HttpDelete("{userId}/{bookId}")]
+        public async Task<IActionResult> DeleteBook(int userId, int bookId)
         {
+            //Checking if userId matches the current user's ID
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            //Checking if the user has got the book in his/her library
+            var read = await _repo.GetRead(userId, bookId);
+
+            //if they don't we return Unathorized
+            if(read==null){
+                return Unauthorized();
+            }
+            //if they do, we delete the book from the library
+            _repo.Delete(read);
 
             var book = await _repo.GetBook(bookId);
 
-            _repo.Delete(book);
-
-            if (await _repo.SaveAll())
-            {
-                return NoContent();
+            if(book!=null){
+                //if the book is not in any of the other libraries, we delete the book as well
+                if(book.UsersWhoRead.Count==1){
+                    _repo.Delete(book);
+                }
+                //Saving changes
+                if (await _repo.SaveAll())
+                {
+                    return NoContent();
+                }
             }
-
-            throw new Exception("Error while deleting message");
+            return BadRequest("Could not delete book");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddBook(
+        [HttpPost("{userId}")]
+        public async Task<IActionResult> AddBook(int userId,
         [FromForm]BookForCreationDto bookForCreationDto)
         {
-            // var userFromRepo = await _repo.GetUser(userId);
+            //Checking if the userId matches the currently logged in user's ID
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
 
             var file = bookForCreationDto.File;
+            var book = _mapper.Map<Book>(bookForCreationDto);
 
-            var uploadResult = new ImageUploadResult();
+            //uploading the book's picture to the cloud
+            var result=_repo.UploadPictureToCloud(book, file);
 
-            if (file.Length > 0)
+            //if successful
+            if (result)
             {
-                using (var stream = file.OpenReadStream())
+                var userFromRepo = await _repo.GetUser(userId);
+                if (userFromRepo!=null)
                 {
-                    var uploadParams = new ImageUploadParams()
-                    {
-                        File = new FileDescription(file.Name, stream),
-                    };
+                    //Adding the book to the user's library and to the database
+                    var read = new Read();
+                    read.Book = book;
+                    read.User = userFromRepo;
 
-                    uploadResult = _cloudinary.Upload(uploadParams);
+                    _repo.Add(book);
+                    _repo.Add(read);
+
+                    //Saving changes
+                    if (await _repo.SaveAll())
+                    {
+                        var bookToReturn = _mapper.Map<BookForDetailedDto>(book);
+                        return CreatedAtRoute("GetBookDetail", new { bookId = book.Id }, bookToReturn);
+                    }
+                }
+            }
+            return BadRequest("Could not add the book");
+        }
+
+        [HttpPost("{userId}/{bookId}")]
+        public async Task<IActionResult> EditBook(int userId,int bookId, [FromForm]BookForEditDto BookForEditDto)
+        {
+            //Checking if the userId matches the currently logged in user's ID
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            //Checking if the book is in the user's library
+            if(await _repo.GetRead(userId,bookId)==null){
+                return BadRequest();
+            }
+
+            var book = await _repo.GetBook(bookId);
+
+            //if the user wants to change the book's title
+            if(BookForEditDto.Name!=null){
+                book.Name = BookForEditDto.Name;
+            }
+
+            //if the user wants to change the book's picture
+            if (BookForEditDto.File != null)
+            {
+                var prevPublicId = book.Picture.PublicId;
+
+                //uploading the picture to the cloud
+                var response = _repo.UploadPictureToCloud(book, BookForEditDto.File);
+
+                //if everything went well
+                if (response)
+                {
+                    //we delete the previous picture from cloud
+                    _repo.DeletePictureFromCloud(prevPublicId);
                 }
             }
 
-            var book = _mapper.Map<Book>(bookForCreationDto);
-
-            var pictureForCreation = new Picture();
-            pictureForCreation.Url = uploadResult.Uri.ToString();
-            pictureForCreation.PublicId = uploadResult.PublicId;
-            pictureForCreation.Book = book;
-
-            book.Picture = pictureForCreation;
-            _repo.Add(book);
-
-            
+            //Saving changes
             if (await _repo.SaveAll())
             {
-                return CreatedAtRoute("GetBookDetail", new { bookId = book.Id }, book);
+                var bookToReturn = _mapper.Map<BookForDetailedDto>(book);
+                return Ok(bookToReturn);
             }
 
-
-            return BadRequest("Could not add the book");
-
-
-            
+            return BadRequest("Could not edit the book");
         }
-
     }
 }

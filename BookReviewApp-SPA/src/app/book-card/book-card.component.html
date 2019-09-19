@@ -1,16 +1,15 @@
-<div class="">
-  <div class="mb-4 card-img-wrapper" >
-      <img class="" style="width: 500px; height: 100px; background:white">
+<div class="mb-4 card card-img-wrapper" >
+      <img src="{{book.picture.url}}" class="card-img-top">
+      <p class="card-name text-center">{{book.name}}</p>
       <ul class="list-inline member-icons animate text-center mt-2">
         <li class="list-inline-item ">
-          <button class="btn btn-success "><i class="fa fa-eye"></i></button>
+          <button class="btn btn-outline-secondary" [routerLink]="['/book/',book.id]"><i class="fa fa-eye"></i></button>
         </li>
         <li class="list-inline-item ">
-          <button class="btn "><i class="fa fa-edit"></i></button>
+          <button class="btn btn-outline-secondary" (click)="openBookEditModal()"><i class="fa fa-edit"></i></button>
         </li>
         <li class="list-inline-item ">
-          <button class="btn "><i class="fa fa-trash"></i></button>
+          <button class="btn btn-outline-secondary" (click)="deleteBook()"><i class="fa fa-trash"></i></button>
         </li>
       </ul>
-</div>
 </div>

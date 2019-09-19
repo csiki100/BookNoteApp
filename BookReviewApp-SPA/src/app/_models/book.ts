@@ -7,6 +7,4 @@ export interface Book{
     name: string;
     chapters: Chapter[];
     picture: Picture;
-
-
 }

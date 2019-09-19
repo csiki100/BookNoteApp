@@ -1,0 +1,72 @@
+.chapter-wrapper{
+    margin:15px;
+}
+
+.chapter-content{
+    padding:15px;
+}
+.button-div{
+    text-align: right;
+}
+
+.button-div button{
+    margin-right: 20px;
+}
+#collapseBasic{
+    background: transparent;
+    border: 2px solid rgb(58, 58, 51);
+    border-top: none;
+}
+.collapse-button{
+    display:block;
+    width:100%;
+    text-align: left;
+    /* background-color: rgb(44, 43, 43); */
+    background-color:#282828;
+    /* background:repeating-linear-gradient(
+  45deg,
+  transparent,
+  transparent 30px,
+  rgb(255, 166, 0) 18px,
+  rgb(255, 166, 0) 38px
+); */
+    border: none;
+}
+.collapse-button:focus{
+    border-color: #282828;
+    box-shadow:0 0 0 0.2rem #3a3a3a;
+}
+textarea{
+   background: #dbdada
+}
+.transparent-input{
+    display: block;
+    background: transparent;
+    border: none;
+    min-width: fit-content;
+    width:fit-content;
+    color:#ffffff;
+    font-weight: 400;
+}
+.transparent-input:focus{
+    width:100%;
+    max-width: 100%;
+}
+
+.btn-outline-secondary-red{
+    border-color: rgb(211, 50, 50);
+    color: rgb(211, 50, 50);
+}
+.btn-outline-secondary-red:hover{
+    border-color: rgb(163, 26, 26);
+    color: rgb(163, 26, 26);
+}
+
+.btn-outline-secondary-green{
+    border-color: rgb(76, 163, 26);
+    color: rgb(76, 163, 26);
+}
+.btn-outline-secondary-green:hover{
+    border-color: rgb(54, 128, 12);
+    color: rgb(54, 128, 12);
+}

@@ -26,9 +26,23 @@ export class BookService {
       )
     );
   }
-  addBook(fileToUpload: File){
+  addBook(userId: number, name: string, fileToUpload: File){
     const formData: FormData = new FormData();
-    formData.append('file', fileToUpload, fileToUpload.name);
-    return this.http.post(this.baseUrl, formData);
+    formData.append('name', name);
+    formData.append('file', fileToUpload);
+    return this.http.post(this.baseUrl + userId, formData);
+  }
+
+  editBook(userId: number, bookId: number, name?: string, fileToUpload?: File) {
+
+    const formData: FormData = new FormData();
+    formData.append("name", name);
+    formData.append("file", fileToUpload);
+
+    return this.http.post(this.baseUrl + userId + '/' + bookId, formData);
+  }
+
+  deleteBook(userId: number, bookId: number) {
+    return this.http.delete(this.baseUrl + userId + '/' + bookId);
   }
 }

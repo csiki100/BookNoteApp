@@ -65,9 +65,9 @@
                     *ngIf="registerForm.hasError('mismatch')"> Passwords must match
                     </div>
             </div>
-            <div class=" form-group text-center">
-                <button [disabled]="!registerForm.valid" class="btn btn-success" type="submit">Register</button>
-                <button  class="btn btn-default" (click)="cancelRegisterMode()">Cancel</button>
+            <div class=" form-group text-center mt-5 mb-5">
+                <button [disabled]="!registerForm.valid" class="btn btn-success mr-4" type="submit">Register</button>
+                <button  class="btn btn-outline-secondary" (click)="cancelRegisterMode()">Cancel</button>
             </div>
         </form>
     </div>

@@ -6,9 +6,13 @@ input[type="file"] {
 
 .file-upload {
     border: 1px solid #ccc;
-    display: inline-block;
+    display: block;
+    margin: auto;
     padding: 16px 22px;
+    width:max-content;
+    max-width:80%;
     cursor: pointer;
+    overflow-wrap: break-word;
 }
 
 .name-group{
@@ -19,8 +23,16 @@ input[type="file"] {
 
 .file-group{
     margin-bottom:60px;
+   
 }
 
 .content{
     padding:30px;
+}
+.background{
+    border-radius: 0px;
+    background: rgba(24, 24, 24, 0.9);
+}
+.black-background{
+    background: black;
 }

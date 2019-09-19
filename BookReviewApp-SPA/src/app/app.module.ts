@@ -21,6 +21,11 @@ import { AddBookCardComponent } from './add-book-card/add-book-card.component';
 import { AddBookComponent } from './add-book/add-book.component';
 import { CommonModule } from '@angular/common';
 import { BookDetailComponent } from './book-detail/book-detail.component';
+import { BookDetailResolver } from './_resolvers/bookdetail.resolver';
+import { CollapseModule } from 'ngx-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChapterEditComponent } from './chapter-edit/chapter-edit.component';
+import { BookEditModalComponent } from './book-edit-modal/book-edit-modal.component';
 
 
 export function tokenGetter() {
@@ -28,36 +33,41 @@ export function tokenGetter() {
 }
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      NavComponent,
-      RegisterComponent,
-      HomeComponent,
-      LoginComponent,
-      MemberBooksComponent,
-      BookCardComponent,
-      BookCardComponent,
-      AddBookCardComponent,
-      AddBookComponent,
-      BookDetailComponent
-   ],
-   imports: [
-      ModalModule.forRoot(),
-      BrowserModule,
-      CommonModule,
-      HttpClientModule,
-      FormsModule,
-      RouterModule.forRoot(appRoutes),
-      ReactiveFormsModule,
-     JwtModule.forRoot({
-         config: {
-            tokenGetter,
-            whitelistedDomains: ['localhost:5000'],
-            blacklistedRoutes:['localhost:5000/api/auth']
-         }
+  declarations: [
+    AppComponent,
+    NavComponent,
+    RegisterComponent,
+    HomeComponent,
+    LoginComponent,
+    MemberBooksComponent,
+    BookCardComponent,
+    BookCardComponent,
+    AddBookCardComponent,
+    AddBookComponent,
+    BookDetailComponent,
+    ChapterEditComponent,
+    BookEditModalComponent
   ],
-  entryComponents: [AddBookComponent],
-  providers: [AuthService, BookService, UserbooksResolver],
+  imports: [
+    ModalModule.forRoot(),
+    BrowserModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    CollapseModule.forRoot(),
+    HttpClientModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ["localhost:5000"],
+        blacklistedRoutes: ["localhost:5000/api/auth"]
+      }
+    })
+  ],
+  entryComponents: [AddBookComponent,BookEditModalComponent],
+  providers: [AuthService, BookService, UserbooksResolver, BookDetailResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

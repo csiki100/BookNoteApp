@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookReview.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190909171246_ExtendedWithCloud")]
-    partial class ExtendedWithCloud
+    [Migration("20190918130535_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,24 +32,30 @@ namespace BookReview.API.Migrations
 
             modelBuilder.Entity("BookReview.API.Models.Chapter", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("BookId");
 
-                    b.Property<int>("ChapterNum");
+                    b.Property<string>("ChapterName");
 
                     b.Property<string>("Content");
 
-                    b.HasKey("Id", "BookId");
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("BookId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Chapters");
                 });
 
             modelBuilder.Entity("BookReview.API.Models.Picture", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("BookId");
 
@@ -57,7 +63,7 @@ namespace BookReview.API.Migrations
 
                     b.Property<string>("Url");
 
-                    b.HasKey("Id", "BookId");
+                    b.HasKey("Id");
 
                     b.HasIndex("BookId")
                         .IsUnique();
@@ -65,7 +71,7 @@ namespace BookReview.API.Migrations
                     b.ToTable("Pictures");
                 });
 
-            modelBuilder.Entity("BookReview.API.Models.Reads", b =>
+            modelBuilder.Entity("BookReview.API.Models.Read", b =>
                 {
                     b.Property<int>("UserId");
 
@@ -100,6 +106,11 @@ namespace BookReview.API.Migrations
                         .WithMany("Chapters")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BookReview.API.Models.User", "User")
+                        .WithMany("Chapters")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BookReview.API.Models.Picture", b =>
@@ -110,7 +121,7 @@ namespace BookReview.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("BookReview.API.Models.Reads", b =>
+            modelBuilder.Entity("BookReview.API.Models.Read", b =>
                 {
                     b.HasOne("BookReview.API.Models.Book", "Book")
                         .WithMany("UsersWhoRead")
@@ -120,7 +131,7 @@ namespace BookReview.API.Migrations
                     b.HasOne("BookReview.API.Models.User", "User")
                         .WithMany("Books")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

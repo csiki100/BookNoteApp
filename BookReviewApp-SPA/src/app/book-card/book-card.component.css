@@ -2,20 +2,39 @@
     transform: scale(1.2,1.2);
     transition-duration: 500ms;
     transition-timing-function: ease-out;
-    opacity: 0.7;
+    opacity: 0.1;
+    filter: grayscale(50%);
+    
 }
 
 .card img{
     transform: scale(1.0,1.0);
     transition-duration: 500ms;
     transition-timing-function: ease-out;
+    max-height: 150px;
 }
 
 .card-img-wrapper{
     overflow: hidden;
     position: relative;
+    background: rgb(14, 13, 13);
 }
-
+.card-name{
+    display: block;
+    position: absolute;
+    top:-20%;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    opacity: 0;
+    transition:all 0.3s ease-in-out
+}
+.card-img-wrapper:hover .card-name{
+    margin-top:13px;
+    top: 0;
+    opacity: 1;
+}
 .member-icons{
     position: absolute;
     bottom:-30%;
@@ -33,4 +52,8 @@
 
 .animate{
     transition:all 0.3s ease-in-out
+}
+
+.fa{
+    color: rgb(255, 166, 0);
 }

@@ -1,6 +1,6 @@
 namespace BookReview.API.Models
 {
-    public class Reads
+    public class Read
     {
         public User User { get; set; }
         public int UserId { get; set; }

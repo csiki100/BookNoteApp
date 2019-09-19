@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using BookReview.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,29 +13,40 @@ namespace BookReview.API.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Chapter> Chapters { get; set; }
+        public DbSet<Read> Reads { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Reads>()
+            builder.Entity<Read>()
             .HasKey(r => new { r.UserId, r.BookId });
 
-            builder.Entity<Reads>()
+
+            //Read and User relationship
+            builder.Entity<Read>()
             .HasOne(r => r.User)
             .WithMany(u => u.Books)
             .HasForeignKey(l => l.UserId)
             .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Reads>()
+            builder.Entity<User>()
+            .HasMany(u => u.Books)
+            .WithOne(r => r.User)
+            .OnDelete(DeleteBehavior.Cascade);
+
+
+            //Read and Book relationship
+            builder.Entity<Read>()
             .HasOne(r => r.Book)
             .WithMany(b => b.UsersWhoRead)
             .HasForeignKey(r => r.BookId)
             .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Chapter>()
-            .HasKey(c => new { c.Id, c.BookId });
+            builder.Entity<Book>()
+            .HasMany(b => b.UsersWhoRead)
+            .WithOne(r => r.Book)
+            .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<Picture>()
-            .HasKey(p => new { p.Id, p.BookId });
+
 
             builder.Entity<Book>()
             .HasOne(b => b.Picture)
@@ -46,10 +58,7 @@ namespace BookReview.API.Data
             .WithOne(c => c.Book)
             .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<Book>()
-            .HasMany(b => b.UsersWhoRead)
-            .WithOne(r => r.Book)
-            .OnDelete(DeleteBehavior.Cascade);
+            
         }
     }
 }

@@ -1,0 +1,27 @@
+<div class="container background" style="overflow: hidden">
+    <div class="row header"><button [routerLink]="['/user/']" class="btn btn-outline-secondary escape-button"><i class="fa fa-arrow-left"></i>
+            Back</button>
+    </div>
+    <div class=" row content-wrapper" style="overflow: scroll;">
+        <div class="book-wrapper">
+            <div class="card-img">
+            <img src="{{book.picture.url}}" class="card-img-top img-thumbnail">
+           </div>
+            <div class="card-footer text-center">
+                <h3>{{book.name}}</h3>
+            </div>
+            <div class="row button-wrapper justify-content-center" >
+                <button (click)="openBookEditModal()" class="btn btn-outline-secondary"><i class="fa fa-edit"></i> Edit Book</button>
+                
+            </div>
+            <div class="row button-wrapper justify-content-center">
+                <button (click)="deleteBook()" class="btn btn-outline-secondary-red"><i class="fa fa-trash"></i> Delete Book</button>
+            </div>
+        </div>
+        <div class="chapters-wrapper">
+            <div *ngFor="let chapter of book.chapters">
+                    <app-chapter-edit [chapter]="chapter" (toDelete) = "deleteChapter()"></app-chapter-edit>
+            </div>
+        </div>
+    </div>
+</div>

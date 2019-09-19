@@ -36,19 +36,20 @@ namespace BookReview.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Chapters",
+                name: "Pictures",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
-                    BookId = table.Column<int>(nullable: false),
-                    ChapterNum = table.Column<int>(nullable: false),
-                    Content = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PublicId = table.Column<string>(nullable: true),
+                    Url = table.Column<string>(nullable: true),
+                    BookId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Chapters", x => new { x.Id, x.BookId });
+                    table.PrimaryKey("PK_Pictures", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Chapters_Books_BookId",
+                        name: "FK_Pictures_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
@@ -56,20 +57,29 @@ namespace BookReview.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pictures",
+                name: "Chapters",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     BookId = table.Column<int>(nullable: false),
-                    Url = table.Column<string>(nullable: true)
+                    UserId = table.Column<int>(nullable: false),
+                    ChapterName = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pictures", x => new { x.Id, x.BookId });
+                    table.PrimaryKey("PK_Chapters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pictures_Books_BookId",
+                        name: "FK_Chapters_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Chapters_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -95,13 +105,18 @@ namespace BookReview.API.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Chapters_BookId",
                 table: "Chapters",
                 column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Chapters_UserId",
+                table: "Chapters",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pictures_BookId",

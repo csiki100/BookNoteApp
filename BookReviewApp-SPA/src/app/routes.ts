@@ -4,6 +4,8 @@ import { MemberBooksComponent } from './member-books/member-books.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserbooksResolver } from './_resolvers/userbooks.resolver';
 import { AddBookComponent } from './add-book/add-book.component';
+import { BookDetailComponent } from './book-detail/book-detail.component';
+import { BookDetailResolver } from './_resolvers/bookdetail.resolver';
 
 
 export const appRoutes: Routes = [
@@ -19,8 +21,9 @@ export const appRoutes: Routes = [
                 resolve: { books: UserbooksResolver }
              },
              {
-               path: 'add',
-               component: AddBookComponent
+               path: 'book/:id',
+               component: BookDetailComponent,
+               resolve: {book: BookDetailResolver}
              }
            ]
          },

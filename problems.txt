@@ -1,0 +1,9 @@
+-registernél nem az új felhasználó user oldalára irányít(, hanem a mostani bejelntkezettére?)
+
+-ha be vagy jelentkezve dobjon a user lapra
+
+-logout
+
+-back button a chaptereknél
+
+-chapterek

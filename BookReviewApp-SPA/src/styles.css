@@ -1,3 +1,102 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-@import '../node_modules/font-awesome/css/font-awesome.min.css';
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background: grey;
+  margin:0;
+  padding:0;
+  color: rgb(255, 166, 0);
+  overflow: auto;
+}
+.background{
+    background: rgba(24, 24, 24, 0.8);
+    border-radius: 3%;
+}
+
+
+.btn{
+    font-weight: 600;
+}
+
+.background-image::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    display: block;
+    height: 100%;
+    width: 100%;
+
+    background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/assets/background-01.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    filter:blur(3px) grayscale(100%);
+}
+
+.background-image {
+  margin:0;
+  padding:0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  height: 105%;
+  width:100%;
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.btn-success{
+ background-color: rgb(255, 166, 0);
+ color: rgba(24, 24, 24, 0.8);
+ border-color:rgb(255, 166, 0);
+}
+
+.btn-success:hover{
+    background-color: rgba(255, 166, 0, 0.788);
+    border-color: rgb(255, 166, 0);
+    color:rgb(12, 9, 0);
+}
+
+.btn-success.disabled, .btn-success:disabled {
+  color: rgb(12, 9, 0);;
+  background-color: rgba(255, 166, 0, 0.788);
+  border-color: rgb(255, 166, 0);
+}
+
+.btn-success:focus{
+    box-shadow: 0 0 0 0.2rem rgb(167, 109, 1);
+    border-color:  rgb(167, 109, 1);
+}
+
+.btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active,
+.show > .btn-success.dropdown-toggle {
+  color: black;
+  background-color: rgba(255, 166, 0, 0.596);
+  border-color: rgba(255, 166, 0, 0.596);
+  
+}
+.btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled).active:focus,
+.show > .btn-success.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgb(167, 109, 1);
+}
+
+.btn-outline-secondary{
+    border-color:rgb(255, 166, 0);
+    color: rgb(255, 166, 0);
+}
+
+.btn-outline-secondary:hover{
+    border-color:rgba(255, 166, 0, 0.788);
+    color: rgba(255, 166, 0, 0.788);
+    background-color: initial;
+}

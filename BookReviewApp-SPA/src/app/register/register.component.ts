@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +9,8 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  constructor(private authService: AuthService, private fb: FormBuilder) {}
+  constructor(private authService: AuthService, private fb: FormBuilder,
+              private router: Router) { }
 
   @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup;
@@ -69,7 +71,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       const user = Object.assign({}, this.registerForm.value);
       this.authService.register(user).subscribe(() => {
-        console.log('siker');
+        this.router.navigate(['user']);
       }, error => {
         console.log(error);
       });

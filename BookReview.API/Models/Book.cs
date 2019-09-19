@@ -8,7 +8,7 @@ namespace BookReview.API.Models
         public string Name { get; set; }
         public ICollection<Chapter> Chapters { get; set; }
         public Picture Picture { get; set; }
-        public ICollection<Reads> UsersWhoRead { get; set; }
+        public ICollection<Read> UsersWhoRead { get; set; }
         
     }
 }

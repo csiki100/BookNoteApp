@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { BookService } from '../_services/book.service';
-import { BsModalRef } from 'ngx-bootstrap';
+import { Component, OnInit } from "@angular/core";
+import { BookService } from "../_services/book.service";
+import { BsModalRef } from "ngx-bootstrap";
+import { AuthService } from "../_services/auth.service";
 
 @Component({
   selector: "app-add-book",
@@ -11,6 +12,7 @@ export class AddBookComponent implements OnInit {
   fileToUpload: File = null;
 
   constructor(
+    private authService: AuthService,
     private bookService: BookService,
     public bsModalRef: BsModalRef
   ) {}
@@ -19,18 +21,24 @@ export class AddBookComponent implements OnInit {
 
   ngOnInit() {}
 
-  uploadFile(file: FileList) {
-    this.fileToUpload = file.item(0);
+  fileChange(event) {
+    this.fileToUpload = event.target.files[0];
   }
 
-  saveFile() {
-    this.bookService.addBook(this.fileToUpload).subscribe(
-      data => {
-        // do something, if upload success
-      },
-      error => {
-        console.log(error);
-      }
-    );
+  addBook() {
+    this.bookService
+      .addBook(
+        this.authService.decodedToken.nameid,
+        this.bookInfo.name,
+        this.fileToUpload
+      )
+      .subscribe(
+        data => {
+          this.bsModalRef.hide();
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 }
