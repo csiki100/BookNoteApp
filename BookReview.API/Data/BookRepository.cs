@@ -234,7 +234,7 @@ namespace BookReview.API.Data
                 {
                     File = new FileDescription(picture.Name, stream),
                     Transformation = new Transformation()
-                        .Width(200).Crop("scale")
+                        .Width(500).Crop("scale")
                 };
 
                 //uploading the image

@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, ViewChild, HostListener } from '@angular/core';
 import { Chapter } from '../../_models/chapter';
 import { ChapterService } from '../../_services/chapter.service';
 import { AuthService } from '../../_services/auth.service';
 import { AlertifyService } from '../../_services/alertify.service';
+import { NgForm } from '@angular/forms';
 
 /**
  * @description Component that shows a dropdown where the User can add a new Chapter to a Book
@@ -37,6 +38,22 @@ export class ChapterAddComponent implements OnInit {
    * @description Variable that stores the Content of the new Chapter
    */
   contentToBe: string;
+
+  /**
+   * the add Form
+   */
+  @ViewChild('addForm', { static: false }) addForm: NgForm;
+
+  /**
+   * @description Shows a confirmation window when the User want to close the page
+   * while there are unsaved changes in the Form
+   */
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    if (this.addForm.dirty) {
+      $event.returnValue = true;
+    }
+  }
 
   constructor(
     private chapterService: ChapterService,
