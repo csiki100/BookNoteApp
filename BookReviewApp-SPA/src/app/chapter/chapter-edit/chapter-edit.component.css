@@ -1,0 +1,66 @@
+
+textarea{
+   background: #dbdada;
+}
+
+textarea:focus{
+     background: #e2e1e1;
+}
+
+#collapseDiv{
+    background: transparent;
+    border: 2px solid rgb(58, 58, 51);
+    border-top: none;
+}
+
+.button-div{
+    text-align: right;
+}
+
+.button-div button{
+    margin-right: 20px;
+}
+
+.chapter-content{
+    padding:15px;
+}
+
+.chapter-name{
+    max-width: 40%;
+    background: transparent;
+    border: none;
+    color:#d8d5d5;
+    font-weight: 400;
+}
+.chapter-name-not-collapsed{
+    background: #dbdada;
+    color: #495057;
+    width:50%;
+    max-width: 50%;
+}
+
+.chapter-name-collapsed{
+    pointer-events: none;
+}
+
+.chapter-wrapper{
+    margin:15px;
+}
+
+.collapse-button{
+    display:block;
+    width:100%;
+    text-align: left;
+    background-color:#282828;
+    border: none;
+    box-shadow: none;
+}
+
+.collapse-button:focus{
+    border-color: #282828;
+}
+
+.grey-box-shadow{
+    box-shadow:0 0 0 0.2rem #3a3a3a;
+}
+

@@ -1,0 +1,37 @@
+input[type="file"] {
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+}
+
+.background{
+    border-radius: 0px;
+    background: rgba(24, 24, 24);
+    margin-bottom: 0;
+}
+
+.content{
+    padding:30px;
+}
+
+.file-group{
+    margin-bottom:60px;
+}
+
+.file-upload {
+    border: 1px solid #ccc;
+    display: block;
+    margin: auto;
+    padding: 16px 22px;
+    width:max-content;
+    max-width:80%;
+    cursor: pointer;
+    overflow-wrap: break-word;
+}
+
+.name-group{
+    margin: auto;
+    margin-top:10px;
+    margin-bottom: 25px;
+}
+

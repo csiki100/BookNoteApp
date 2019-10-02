@@ -1,19 +1,25 @@
 import {Routes} from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { MemberBooksComponent } from './member-books/member-books.component';
-import { AuthGuard } from './_guards/auth.guard';
+import { HomeComponent } from './common/home/home.component';
+import { MemberBooksComponent } from './member/member-books/member-books.component';
+import { NonMemberGuard } from './_guards/non-member.guard';
 import { UserbooksResolver } from './_resolvers/userbooks.resolver';
-import { AddBookComponent } from './add-book/add-book.component';
-import { BookDetailComponent } from './book-detail/book-detail.component';
+import { AddBookComponent } from './book/book-add-modal/add-book.component';
+import { BookDetailComponent } from './book/book-detail/book-detail.component';
 import { BookDetailResolver } from './_resolvers/bookdetail.resolver';
+import { MemberGuard } from './_guards/member.guard';
 
 
 export const appRoutes: Routes = [
-         { path: '', component: HomeComponent },
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [MemberGuard],
+    component: HomeComponent,
+  },
          {
            path: '',
            runGuardsAndResolvers: 'always',
-        //    canActivate: [AuthGuard],
+           canActivate: [NonMemberGuard],
            children: [
              {
                path: 'user',

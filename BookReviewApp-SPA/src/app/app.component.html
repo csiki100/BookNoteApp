@@ -1,1 +1,6 @@
-<router-outlet></router-outlet>
+<div class="background-image">
+    <app-nav *ngIf="loggedIn"></app-nav>
+    <div id="app-wrapper">
+        <router-outlet></router-outlet>
+    </div>
+</div>

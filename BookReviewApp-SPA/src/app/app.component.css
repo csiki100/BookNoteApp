@@ -1,0 +1,36 @@
+.background-image::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    display: block;
+    height: 100%;
+    width: 100%;
+
+    background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/assets/background-01.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    filter:blur(3px) grayscale(100%);
+}
+
+.background-image {
+  margin:0;
+  padding:0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  height: 105%;
+  width:100%;
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+#app-wrapper{
+    margin: 80px 0px;
+}

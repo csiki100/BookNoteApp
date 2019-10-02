@@ -1,0 +1,67 @@
+
+.card-wrapper{
+    position: relative;
+    overflow:hidden;
+    background: rgb(14, 13, 13);
+    border-radius: 3px;
+}
+
+.card-wrapper img{
+    display: block;
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+    max-height: 150px;
+    border-radius: 3px;
+    margin: auto;
+}
+
+.card-wrapper:hover img{
+    transform: scale(1.2,1.2);
+    opacity: 0.1;
+    filter: grayscale(50%);
+}
+
+.card-wrapper:hover .member-icons{
+    bottom: 0;
+    opacity: 1;
+}
+
+.card-wrapper .card-name{
+    max-height: 50%;
+    overflow: hidden;
+    position: absolute;
+    padding:0px 15px;
+    top:-20%;
+    left: 0;
+    right: 0;
+    margin-top:10px;
+    margin-right: auto;
+    margin-left: auto;
+    opacity: 0;
+    word-wrap: break-word;
+    transition:all 0.3s ease-in-out;
+}
+
+.card-wrapper:hover .card-name{
+    top: 0;
+    opacity: 1;
+}
+
+.fa{
+    color: rgb(255, 166, 0);
+}
+
+.footer-wrapper{
+    padding:5px;
+}
+
+.member-icons{
+    position: absolute;
+    bottom:-10%;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    opacity: 0;
+}
+

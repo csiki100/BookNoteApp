@@ -5,19 +5,25 @@ using BookReview.API.Models;
 
 namespace DatingApp.API.Helpers
 {
+    ///<summary>
+    ///Class that configures AutoMapper
+    ///</summary>
     public class AutoMapperProfiles:Profile
     {
+        ///<summary>
+        ///Class Constructor, object-object maps can are configured here
+        ///</summary>
         public AutoMapperProfiles()
         {
-            CreateMap<Book, BookForUserListDto>();
-            CreateMap<Book, BookForDetailedDto>();
+            CreateMap<Book, BookSummarizedViewDto>();
+            CreateMap<Book, BookDetailedViewDto>();
             CreateMap<BookForCreationDto, Book>();
             CreateMap<UserForRegisterDto, User>();
             CreateMap<User, UserToReturnDto>();
-            CreateMap<Chapter,ChapterForDetailedBookDto>();
-            CreateMap<Picture, PictureForDetailedBookDto>();
+            CreateMap<Chapter,ChapterDetailedViewDto>();
+            CreateMap<Picture, PictureDto>();
             CreateMap<ChapterForCreationDto, Chapter>();
-            CreateMap<Chapter, ChapterToReturnDto>();
+            CreateMap<Chapter, ChapterDetailedViewDto>();
         }
     }
 }

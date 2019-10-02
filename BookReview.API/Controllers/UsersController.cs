@@ -8,22 +8,36 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookReview.API.Controllers
 {
     [Authorize]
-    [ApiController]
     [Route("api/[controller]")]
-    public class UsersController :ControllerBase
+    [ApiController]
+    public class UsersController : ControllerBase
     {
+        /// <summary>
+        /// Repository that contains the implementations of authentication methods
+        /// </summary>
         private readonly IBookRepository _repo;
+        /// <summary>
+        /// AutoMapper that is used for object-object mapping
+        /// </summary>
         private readonly IMapper _mapper;
+
+
+
+        /// <summary>
+        /// Class Constructor
+        /// </summary>
         public UsersController(IBookRepository repo, IMapper mapper)
         {
             _mapper = mapper;
             _repo = repo;
         }
 
-        [HttpGet("{id}", Name = "GetUser")]
-        public async Task<IActionResult> GetUser(int id)
+
+        [HttpGet("{userId}", Name = "GetUser")]
+        public async Task<IActionResult> GetUser(int userId)
         {
-            var user = await _repo.GetUser(id);
+            var user=await _repo.GetUser(userId);
+
             var userToReturn = _mapper.Map<UserToReturnDto>(user);
 
             return Ok(userToReturn);

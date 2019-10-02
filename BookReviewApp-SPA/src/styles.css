@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "../node_modules/font-awesome/css/font-awesome.min.css";
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+/* @import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css'; */
 
 html,
 body {
@@ -10,13 +12,61 @@ body {
   margin:0;
   padding:0;
   color: rgb(255, 166, 0);
-  overflow: auto;
 }
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+.alertify-notifier .ajs-message.ajs-success {
+  background: rgba(12, 9, 0, 0.658);
+  color: rgb(67, 141, 24);
+  border: 2px solid rgb(67, 141, 24);
+  text-align: center;
+}
+.alertify-notifier .ajs-message.ajs-error {
+  background: rgba(12, 9, 0, 0.658);
+  color: rgb(211, 50, 50);
+  border: 2px solid rgb(211, 50, 50);
+  text-align: center;
+}
+
+.alertify .ajs-dialog {
+  background-color:rgba(31, 31, 29);
+}
+
+.alertify .ajs-header {
+  background-color:rgba(31, 31, 29);
+}
+
+.alertify .ajs-footer {
+  background-color:rgba(31, 31, 29);
+}
+
+.alertify .ajs-footer .ajs-buttons .ajs-button {
+  border: 1px solid rgb(255, 166, 0);
+  color: rgb(255, 166, 0);
+  background-color: transparent;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+}
+
+.alertify .ajs-footer .ajs-buttons .ajs-button:hover{
+  border-color:rgba(255, 166, 0, 0.788);
+    color: rgba(255, 166, 0, 0.788);
+    background-color: initial;
+}
+.alertify .ajs-footer .ajs-buttons .ajs-button:focus{
+  outline:none;
+}
+
 .background{
     background: rgba(24, 24, 24, 0.8);
     border-radius: 3%;
+    margin-bottom:80px;
 }
-
 
 .btn{
     font-weight: 600;
@@ -55,9 +105,48 @@ body {
   scrollbar-width: none;
 }
 
+.btn-outline-secondary{
+    border-color:rgb(255, 166, 0);
+    color: rgb(255, 166, 0);
+}
+
+.btn-outline-secondary:hover{
+    border-color:rgba(255, 166, 0, 0.788);
+    color: rgba(255, 166, 0, 0.788);
+    background-color: initial;
+}
+
+.btn-outline-secondary-green{
+    border-color: rgb(76, 163, 26);
+    color: rgb(76, 163, 26);
+}
+.btn-outline-secondary-green:hover{
+    border-color: rgb(54, 128, 12);
+    color: rgb(54, 128, 12);
+}
+
+.btn-outline-secondary-orange{
+    border-color: rgb(197, 121, 21);
+    color: rgb(197, 121, 21);
+}
+.btn-outline-secondary-orange:hover{
+    border-color: rgb(170, 104, 17);
+    color: rgb(170, 104, 17);
+}
+
+.btn-outline-secondary-red{
+    border-color: rgb(211, 50, 50);
+    color: rgb(211, 50, 50);
+}
+
+.btn-outline-secondary-red:hover{
+    border-color: rgb(163, 26, 26);
+    color: rgb(163, 26, 26);
+}
+
 .btn-success{
  background-color: rgb(255, 166, 0);
- color: rgba(24, 24, 24, 0.8);
+ color: rgb(24, 24, 24);
  border-color:rgb(255, 166, 0);
 }
 
@@ -90,13 +179,5 @@ body {
     box-shadow: 0 0 0 0.2rem rgb(167, 109, 1);
 }
 
-.btn-outline-secondary{
-    border-color:rgb(255, 166, 0);
-    color: rgb(255, 166, 0);
-}
 
-.btn-outline-secondary:hover{
-    border-color:rgba(255, 166, 0, 0.788);
-    color: rgba(255, 166, 0, 0.788);
-    background-color: initial;
-}
+

@@ -1,0 +1,33 @@
+<form class="chapter-wrapper">
+  <button [ngClass]="{'grey-box-shadow': !isCollapsed}" type="button" class="collapse-button btn"
+    (click)="isCollapsed=!isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+    
+    <div class="chapter-add-name-div" *ngIf="isCollapsed">
+      <i class="fa fa-plus-circle fa-lg"></i>  Add new Chapter
+    </div>
+    
+    <input *ngIf="!isCollapsed"
+      [ngClass]="{'chapter-name-not-collapsed': !isCollapsed,
+                  'chapter-name-collapsed':isCollapsed}"
+      (click)="stayOpen($event)" (keyup)="$event.preventDefault()" 
+      class="chapter-name form-control" type="text" name="name" id="name"
+      [(ngModel)]="nameToBe">
+  </button>
+
+  <div id="collapseDiv" [collapse]="isCollapsed" [isAnimated]="true">
+
+    <div class="card card-block card-header">
+      <div class="row chapter-content">
+        <textarea class="form-control" [(ngModel)]="contentToBe" name="content" rows="10"
+          style="width: 100%"></textarea>
+      </div>
+
+      <div class="row">
+        <button class="btn btn-outline-secondary-green " type="button" (click)="addChapter()">
+          <i class="fa fa-check"></i> Save New Chapter
+        </button>
+      </div>
+    </div>
+
+  </div>
+</form>

@@ -1,0 +1,59 @@
+.background{
+    padding:0;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.book-wrapper{
+    width: 30%;
+    border-right: 3px solid rgb(58, 58, 51);
+    padding:15px;
+}
+
+.button-wrapper{
+    margin:15px 0px 0px 0px;
+}
+
+.button-wrapper button{
+    width:60%;
+    padding: 6px 0px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.card-footer{
+    border-bottom:1px solid rgb(145, 94, 1);
+    word-wrap: break-word;
+}
+
+.chapters-wrapper{
+    width: 70%;
+    padding:15px;
+}
+
+.content-wrapper{
+    padding:10px;
+}
+
+.escape-button{
+   margin:8px 30px;
+   padding:4px 10px;
+}
+
+.header{
+     background-color:  rgba(31, 31, 29,0.7);
+     margin:0;
+     padding:0;
+}
+
+.img-thumbnail{
+    background-color: rgb(80, 77, 77);
+    padding:0;
+    margin: 0px 0px 0px 3px;
+    border: 2px solid rgb(80, 77, 77);
+}
+
+
+
+
+
