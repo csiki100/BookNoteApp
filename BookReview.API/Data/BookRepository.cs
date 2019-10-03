@@ -97,9 +97,6 @@ namespace BookReview.API.Data
         {
             //Getting the book from the database
             var book= await _context.Books
-            .Include(b => b.Picture)
-            .Include(b => b.Chapters)
-            .Include(b => b.UsersWhoRead)
             .FirstOrDefaultAsync(b => b.Id == bookId);
 
 
@@ -136,7 +133,7 @@ namespace BookReview.API.Data
             var bookIds = _context.Reads.Where(r => r.UserId == userId).Select(r => r.BookId);
 
             //getting the books
-            var books = await _context.Books.Include(b => b.Picture)
+            var books = await _context.Books
             .Where(b => bookIds.Contains(b.Id)).OrderBy(b => b.Name).ToListAsync();
 
             return books;

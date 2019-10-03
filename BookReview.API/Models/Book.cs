@@ -6,9 +6,9 @@ namespace BookReview.API.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Chapter> Chapters { get; set; }
-        public Picture Picture { get; set; }
-        public ICollection<Read> UsersWhoRead { get; set; }
+        public virtual ICollection<Chapter> Chapters { get; set; }
+        public virtual Picture Picture { get; set; }
+        public virtual ICollection<Read> UsersWhoRead { get; set; }
         
     }
 }

@@ -93,7 +93,7 @@ export class ChapterAddComponent implements OnInit {
    * @description Function that prevents the dropdown from closing
    * @param event data of the event
    */
-  private stayOpen(event: MouseEvent) {
+  stayOpen(event: MouseEvent) {
     if (!this.isCollapsed) {
       event.stopImmediatePropagation();
     }
