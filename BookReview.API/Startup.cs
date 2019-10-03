@@ -55,8 +55,6 @@ namespace BookReview.API
             ConfigureServices(services);
         }
 
-        
-
         public void ConfigureServices(IServiceCollection services)
         {
             
@@ -82,15 +80,6 @@ namespace BookReview.API
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
-            });
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info
-                {
-                    Title = "Example API",
-                    Version = "v1"
-                });
             });
         }
 
@@ -119,11 +108,6 @@ namespace BookReview.API
                 });
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 //app.UseHsts();
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Example API v1");
-                });
             }
 
             //app.UseHttpsRedirection();
